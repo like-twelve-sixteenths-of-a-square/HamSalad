@@ -1,17 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
     private Rigidbody2D playerRb;
+    private Animator animator;
     public float speed;
     public float jump;
     public bool onFloor;
+    public float powerupLength;
 
     void Start()
     {
         playerRb = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();    
         onFloor = true;
     }
 
@@ -23,7 +27,7 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKey(KeyCode.Space) && onFloor)
+        if (Input.GetKeyDown(KeyCode.Space) && onFloor)
         {
             playerRb.AddForce(Vector2.up * jump, ForceMode2D.Impulse);
             onFloor = false;
@@ -42,5 +46,40 @@ public class PlayerController : MonoBehaviour
         {
             onFloor = true;
         }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        //If you collide with a powerup, delete the powerup and become powered up
+        if (collision.CompareTag("Swagger"))
+        {
+            //Begins Swag Process
+            animator.SetTrigger("Swagify");
+
+
+            //Makes the player heavy and retains speed
+            gameObject.GetComponent<Rigidbody2D>().mass *= 5;
+            speed *= 5;
+            jump *= 5;
+
+            //removes the powerup item
+            Destroy(collision.gameObject);
+
+            //starts powerdown routine
+            StartCoroutine(PowerupCDR());
+        }
+    }
+
+    IEnumerator PowerupCDR()
+    {
+        //When powered up, wait for a set time, then stop being powered up
+        yield return new WaitForSeconds(powerupLength);
+        animator.SetTrigger("Deswagify");
+
+
+        //Returns normal mass and variables
+        gameObject.GetComponent<Rigidbody2D>().mass /= 5;
+        speed /= 5;
+        jump /= 5;
     }
 }

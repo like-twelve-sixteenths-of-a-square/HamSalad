@@ -14,6 +14,11 @@ public class LungingCrate : MonoBehaviour
         player = GameObject.Find("Fellaball");
     }
 
+    private void Update()
+    {
+        if (transform.position.y < -10) { Destroy(gameObject); }
+    }
+
     private void FixedUpdate()
     {
         Vector2 lookDirection = (player.transform.position - transform.position).normalized;

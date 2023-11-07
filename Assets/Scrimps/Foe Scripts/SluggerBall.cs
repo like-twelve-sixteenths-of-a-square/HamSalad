@@ -8,12 +8,19 @@ public class SluggerBall : MonoBehaviour
     public float jumpForce;
     private Rigidbody2D rb;
     private GameObject player;
+    private Animator animator;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         player = GameObject.Find("Fellaball");
+        animator = GetComponent<Animator>();
         StartCoroutine(Repeating());
+    }
+
+    private void Update()
+    {
+        if (transform.position.y < -10) { Destroy(gameObject); }
     }
 
     IEnumerator Repeating()
@@ -24,11 +31,13 @@ public class SluggerBall : MonoBehaviour
 
             //Prepare charge
             Debug.Log("Preparing Charge...");
+            animator.SetTrigger("Prime");
 
             yield return new WaitForSeconds(1);
 
             //Warn charge
             Debug.Log("Warning! Charge imminent!");
+            animator.SetTrigger("Ignite");
 
             yield return new WaitForSeconds(1);
 
@@ -51,6 +60,7 @@ public class SluggerBall : MonoBehaviour
             yield return new WaitForSeconds(0.5f);
 
             Debug.Log("Recovering...");
+            animator.SetTrigger("Cool");
         }
     }
 }

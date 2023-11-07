@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Platform
   - Enemy
+  - Swagger
   layers:
   - Default
   - TransparentFX
