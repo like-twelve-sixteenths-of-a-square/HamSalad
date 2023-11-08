@@ -89,8 +89,8 @@ AnimatorStateTransition:
   m_PrefabAsset: {fileID: 0}
   m_Name: 
   m_Conditions:
-  - m_ConditionMode: 1
-    m_ConditionEvent: Deswagify
+  - m_ConditionMode: 2
+    m_ConditionEvent: IsSwagged
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -6215091685781528055}
@@ -115,14 +115,8 @@ AnimatorController:
   m_Name: FellaAnims
   serializedVersion: 5
   m_AnimatorParameters:
-  - m_Name: Swagify
-    m_Type: 9
-    m_DefaultFloat: 0
-    m_DefaultInt: 0
-    m_DefaultBool: 0
-    m_Controller: {fileID: 0}
-  - m_Name: Deswagify
-    m_Type: 9
+  - m_Name: IsSwagged
+    m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
@@ -171,7 +165,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 1
-    m_ConditionEvent: Swagify
+    m_ConditionEvent: IsSwagged
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -692642358940121988}

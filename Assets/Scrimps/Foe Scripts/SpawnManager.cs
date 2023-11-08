@@ -31,11 +31,12 @@ public class SpawnManager : MonoBehaviour
         {
             waveNumber++;
             SpawnEnemyWave(waveNumber);
-        }
-        int powerupChance = Random.Range(1, 6);
-        if (powerupChance == 1 && goodie == 0)
-        {
-            Instantiate(powerupPrefab, GeneratePowerupPosition(), transform.rotation);
+
+            int powerupChance = Random.Range(1, 6);
+            if (powerupChance == 1 && goodie == 0)
+            {
+                Instantiate(powerupPrefab, GeneratePowerupPosition(), transform.rotation);
+            }
         }
     }
     void SpawnEnemyWave(int foestoSpawn)
@@ -57,7 +58,7 @@ public class SpawnManager : MonoBehaviour
     private Vector2 GeneratePowerupPosition()
     {
         float spawnPosX = Random.Range(-spawnRange+2, spawnRange-2);
-        Vector2 randomPos = new Vector3(spawnPosX, -5, 0);
+        Vector2 randomPos = new Vector3(spawnPosX, -5.5f, 0);
         return randomPos;
     }
 }

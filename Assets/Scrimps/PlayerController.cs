@@ -36,12 +36,12 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        //Just checks if you can jump again lol :3
+        //Lets you jump off the floor
         if (collision.gameObject.CompareTag("Platform"))
         {
             onFloor = true;
         }
-        //Just checks if you can jump again lol :3
+        //Lets you jump off enemies
         if (collision.gameObject.CompareTag("Enemy"))
         {
             onFloor = true;
@@ -54,7 +54,7 @@ public class PlayerController : MonoBehaviour
         if (collision.CompareTag("Swagger"))
         {
             //Begins Swag Process
-            animator.SetTrigger("Swagify");
+            animator.SetBool("IsSwagged", true);
 
 
             //Makes the player heavy and retains speed
@@ -74,7 +74,7 @@ public class PlayerController : MonoBehaviour
     {
         //When powered up, wait for a set time, then stop being powered up
         yield return new WaitForSeconds(powerupLength);
-        animator.SetTrigger("Deswagify");
+        animator.SetBool("IsSwagged", false);
 
 
         //Returns normal mass and variables
