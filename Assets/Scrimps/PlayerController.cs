@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -32,6 +33,8 @@ public class PlayerController : MonoBehaviour
             playerRb.AddForce(Vector2.up * jump, ForceMode2D.Impulse);
             onFloor = false;
         }
+
+        if (transform.position.y < -10) { SceneManager.LoadScene( SceneManager.GetActiveScene().name); }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

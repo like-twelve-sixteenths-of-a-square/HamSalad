@@ -26,8 +26,8 @@ public class ShooterBall : MonoBehaviour
             {
                 yield return new WaitForSeconds(0.5f);
                 Vector2 lookDirection = (player.transform.position - transform.position).normalized;
-                rb.AddForce(lookDirection * speed, ForceMode2D.Impulse);
-                rb.AddForce(Vector2.up * jumpForce * 2, ForceMode2D.Impulse);
+                rb.AddForce(lookDirection * speed / 4, ForceMode2D.Impulse);
+                rb.AddForce(Vector2.up * jumpForce / 4 * 2, ForceMode2D.Impulse);
             }
 
             yield return new WaitForSeconds(1);
@@ -37,7 +37,7 @@ public class ShooterBall : MonoBehaviour
 
             yield return new WaitForSeconds(0.5f);
 
-            rb.AddForce(Vector2.up * jumpForce * 7, ForceMode2D.Impulse);
+            rb.AddForce(Vector2.up * jumpForce / 4 * 7, ForceMode2D.Impulse);
 
             yield return new WaitForSeconds(0.4f);
 
@@ -49,6 +49,7 @@ public class ShooterBall : MonoBehaviour
 
             for (int i = 0; i < 16; i++)
             {
+                yield return new WaitForSeconds(0.01f);
                 transform.Rotate(Vector3.forward * 22.5f);
                 Instantiate(projectile, transform.position, transform.rotation);
             }
@@ -57,5 +58,10 @@ public class ShooterBall : MonoBehaviour
 
             rb.gravityScale = 1;
         }
+    }
+
+    private void Update()
+    {
+        if (transform.position.y < -10) { Destroy(gameObject); }
     }
 }
